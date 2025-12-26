@@ -238,7 +238,7 @@ class Storage {
   }
   async getMessagesByPhoneNumber(phoneNumberId) {
     const messages = await MessageModel.find({ phoneNumberId }).sort({
-      timestamp: 1
+      timestamp: -1
     });
     return messages.map((doc) => {
       const data = doc.toObject();
@@ -2194,21 +2194,12 @@ async function startServer() {
     const io = setupSocketIO(httpServer);
     setSocketIOInstance(io);
     const port = process.env.PORT || 3e3;
-    const __dirname = import.meta.dirname;
-    const distPath = path.join(__dirname, "../spa");
-    app.use(express.static(distPath));
-    app.use((req, res) => {
 
-      if (req.path.startsWith("/api/") || req.path.startsWith("/health")) {
-        return res.status(404).json({ error: "API endpoint not found" });
-      }
-      res.sendFile(path.join(distPath, "index.html"));
-    });
     httpServer.listen(port, () => {
       console.log(`🚀 SMSHub server running on port ${port}`);
       console.log(`📱 Frontend: https://smshub.netlify.app`);   // Netlify frontend
-      console.log(`🔧 API: https://your-backend.onrender.com/api`); // Render backend URL
-      console.log(`⚡ WebSocket: wss://your-backend.onrender.com`); // Render WebSocket URL
+      console.log(`🔧 API: https://smshub-ki80.onrender.com/api`); // Render backend URL
+      console.log(`⚡ WebSocket: wss://smshub-ki80.onrender.com`); // Render WebSocket URL
     });
 
 
