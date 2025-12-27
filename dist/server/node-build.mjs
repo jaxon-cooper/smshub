@@ -257,7 +257,7 @@ async function createServer() {
 // ===== Socket.IO =====
 function setupSocketIO(httpServer) {
   const io = new Server(httpServer, {
-    cors: { origin: "https://smshub.netlify.app", methods: ["GET", "POST"], credentials: true }
+    cors: { origin: "https://smshub.netlify.app", "http://localhost:3000", "http://localhost:8080", "http://localhost:5173", /^https:\/\/.*\.fly\.dev$/, methods: ["GET", "POST"], credentials: true }
   });
   io.use((socket, next) => {
     const token = extractTokenFromHeader(socket.handshake.auth.authorization);
