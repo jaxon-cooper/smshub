@@ -232,13 +232,10 @@ const adminOnly = (req, res, next) => {
 async function createServer() {
   await connectDB();
   const app = express();
-
-app.use(
-  cors({
-    origin: [
-      "https://smshub.netlify.app",
+  app.use(cors({origin: [ "https://smshub.netlify.app",
       "http://localhost:3000",
       "http://localhost:8080",
+      "http://localhost:5173",
       /^https:\/\/.*\.fly\.dev$/, // Allow all fly.dev preview URLs
     ],
     credentials: true,
