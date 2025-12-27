@@ -232,9 +232,7 @@ const adminOnly = (req, res, next) => {
 async function createServer() {
   await connectDB();
   const app = express();
-  app.use(cors());
 
-// Is mein change karo:
 app.use(
   cors({
     origin: [
